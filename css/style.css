@@ -1,0 +1,17 @@
+.head1 {
+    text-align: center;
+    color: #444e5e;
+}
+
+#trainList {
+    height: 200px;
+    width: auto;
+    background-color: #8e8a84;
+}
+
+#trainAdder {
+    height: 200px;
+    width: auto;
+    background-color: lightblue;
+
+}
