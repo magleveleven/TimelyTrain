@@ -39,24 +39,24 @@ $("#add-train-btn").on('click',function(event) {
 
     var newTrain = {
         name: trainName,
-        desitn: destination,
+        destin: destination,
         first: firstTime,
         freq: frequency,
     };
 
     database.ref().push(newTrain);
 
-    console.log(trainName.name);
-    console.log(destination.destin);
-    console.log(firstTime.first);
-    console.log(frequency.freq);
+    //console.log(trainName.name);
+    //console.log(destination.destin);
+    //console.log(firstTime.first);
+    //console.log(frequency.freq);
 
     $("#train-name-input").val("");
     $("#destination-input").val("");
     $("#first-time-input").val("");
     $("#frequency-input").val("");
 
-
+});
 // add new record to HTML and firbase 
 database.ref().on("child_added", function(childSnapshot) {
     console.log(childSnapshot.val());
@@ -67,12 +67,21 @@ database.ref().on("child_added", function(childSnapshot) {
     var firstTime = childSnapshot.val().first;
     var frequency = childSnapshot.val().freq;
 
-    console.log(trainName);
-    console.log(destination);
-    console.log(firstTime);
-    console.log(frequency);
+    //console.log(trainName);
+    //console.log(destination);
+    //console.log(firstTime);
+    //console.log(frequency);
 
-    var minsAway = 
+    moment(firstTime).format("HH:mm");
+    moment(frequency).format("HH:mm");
+
+    
+    //need  to  re-do  this  equation, it's not  working correctly  
+    var minsAway = moment().diff(moment(firstTime, "HH:mm"));
+    console.log(minsAway); 
+
+    minsAway = moment.unix(minsAway).format("HH:mm");
+    console.log(minsAway);
 
     var newRow = $("<tr>").append(
         $("<td>").text(trainName),
@@ -83,5 +92,7 @@ database.ref().on("child_added", function(childSnapshot) {
     )
 
     $("#train-table > tbody").append(newRow);
-});
+})
+
+
 
